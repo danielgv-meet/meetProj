@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profiles</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: powderblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #444;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: tomato;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: tomato;
+        }
+
+        p {
+            color: #555;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin: 0 0 10px;
+            color: #444;
+        }
+
+        button {
+            background-color: tomato;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <h1>PROFILES</h1>
+    <form action="/profiles" method="POST">
+        <input type="text" name="id" placeholder="Enter user's id:">
+        <input type="submit" value="Submit">    
+        <p>Copy and paste the user ID here to see the user's profile</p>
+    </form>
+    <ul>
+        {% for i in users %}
+        <li>
+            <h3>{{ users[i]["name"] }}</h3>
+            {% if users[i]["school"] == "Y" %}Younited{% else %}Other{% endif %}
+            <br>ID: {{ i }}
+        </li>
+        {% endfor %}
+    </ul>
+    <button><a href="/home">Home</a></button>
+</body>
+</html>
