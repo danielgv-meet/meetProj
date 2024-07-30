@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask import session as login_session
 import pyrebase
-import firebase
 
 firebaseConfig = {
   "apiKey": "AIzaSyB057zr6FS31fUqXSuvPuGwTgf4CU3_MNM",
