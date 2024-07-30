@@ -4,6 +4,7 @@
 	</style>
 </head>
 <body>
+	<h1>wow</h1>
 	<h1>{{users[id]["name"]}}</h1>
 	{% if users[id]["school"] == "Y" %}
 		<p>Younited</p>
@@ -11,6 +12,8 @@
 		<p></p>
 	{% endif %}
 	<p>EMAIL: {{users[id]["email"]}}</p>
-	
+	{% if user_id == id %}
+	<a href="/edit_profile">Click here to edit profile</a>
+	{% endif %}
 </body>
 </html>
