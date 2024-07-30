@@ -101,6 +101,21 @@ def signout():
 	login_session["user"].clear()
 	return redirect('/')
 
+
+@app.route('/edit_profile', methods=['GET', 'GET'])
+def edit_profile():
+  if request.method == "POST":
+    school_name = request.form['school']
+    hobbies = request.form['hobbies']
+    name = request.form['name']
+    UID = login_session['user']['localId']
+    if UID in db.child('Users'):
+      if school_name == "Younited":
+        db.child('Users').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies})
+      else:
+        user = db.child('Users').child(UID).get().val()
+        db.child('Users').child(UID).delete()
+        db.child('user_o').child(UID).set(user)
 #First Pull
 
 if __name__ == "__main__":
