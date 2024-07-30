@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask import session as login_session
 import pyrebase
-# <<<<<<< Updated upstream
-# =======
-# # import firebase
-# >>>>>>> Stashed changes
+# import firebase
 
 firebaseConfig = {
   "apiKey": "AIzaSyB057zr6FS31fUqXSuvPuGwTgf4CU3_MNM",
@@ -16,12 +13,10 @@ firebaseConfig = {
   "databaseURL": "https://project2-b06a5-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
-
+app = Flask(__name__, template_folder='templates', static_folder='static')
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 auth = firebase.auth()
-app = Flask(__name__, template_folder='templates', static_folder='static')
-
 app.config['SECRET_KEY'] = 'super-secret-key'
 
 @app.route("/")
@@ -76,7 +71,10 @@ def signin():
 def profiles():
 	if request.method == "POST":
 		users_id = request.form['id']
-		return render_template('profile.html', id = users_id, users = db.child('Users').get().val())
+		if users_id in db.child('Users').get().val():
+			return render_template('profile.html', id = users_id, users = db.child('Users').get().val(), user_id=login_session['user']['localId'])
+		else:
+			return "ERROR: invalid input"
 	else:
 		return render_template('profiles.html', users = db.child('Users').get().val())
 
@@ -89,35 +87,44 @@ def home():
 		return render_template('home.html')
 
 @app.route("/your_profile")
-def your_porfile():
+def your_profile():
 	UID = login_session['user']['localId']
 	if UID in db.child('Users').get().val():
-		return render_template('profile.html', id=UID, users=db.child('Users').get().val())
+		return render_template('profile.html', id=UID, users=db.child('Users').get().val(), user_id=UID)
 	else:
-		return render_template('profile.html', id=UID, users=db.child('user_o').get().val())
+		return render_template('profile.html', id=UID, users=db.child('user_o').get().val(), user_id=UID)
 
 @app.route("/signout")
 def signout():
 	login_session["user"].clear()
 	return redirect('/')
 
-
-@app.route('/edit_profile', methods=['GET', 'GET'])
+@app.route('/edit_profile', methods=['POST', 'GET'])
 def edit_profile():
   if request.method == "POST":
-    school_name = request.form['school']
-    hobbies = request.form['hobbies']
-    name = request.form['name']
-    UID = login_session['user']['localId']
-    if UID in db.child('Users'):
-      if school_name == "Younited":
-        db.child('Users').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies})
-      else:
-        user = db.child('Users').child(UID).get().val()
-        db.child('Users').child(UID).delete()
-        db.child('user_o').child(UID).set(user)
-#First Pull
+  	school_name = request.form['school']
+  	hobbies = request.form['hobbies']
+  	name = request.form['name']
+  	UID = login_session['user']['localId']
+  	if UID in db.child('Users').get().val():
+  		if school_name.lower() == "younited":
+  			db.child('Users').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies})
+  		else:
+  			user = db.child('Users').child(UID).get().val()
+  			db.child('Users').child(UID).remove()
+  			db.child('user_o').child(UID).set(user)
+  			db.child('user_o').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies, "school" :"O"})
+  	else:
+  		if school_name.lower() != "younited":
+  			db.child('user_o').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies})
+  		else:
+  			user = db.child('user_o').child(UID).get().val()
+  			db.child('user_o').child(UID).remove()
+  			db.child('Users').child(UID).set(user)
+  			db.child('Users').child(UID).update({'name': name, 'school_name': school_name, "hobbies": hobbies, "school" :"Y"})
+  	return redirect(url_for('your_profile'))
+  else:
+  	return render_template('edit_profile.html')
 
 if __name__ == "__main__":
  	app.run(debug=True)
-    
