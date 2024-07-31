@@ -2,28 +2,96 @@
 <html>
 <head>
     <style>
-        body {font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #e0f7fa; margin: 0; 
-        	padding: 0;}
-        header {background-color: #00356B; padding: 15px 20px; text-align: center; -bottom: 2px solid #81d4fa;
-            display: flex; justify-content: center; gap: 20px;}
-        h1 {text-align: center; font-size: 80px; margin: 0; padding: 20px 0; color: #01579b; }
-        h2 {text-align: center; font-size: 24px; margin: 0; padding: 10px 0; color: #01579b;}
-        a {display: inline-block;text-align: center; padding: 12px 20px; margin: 5px; text-decoration: none;
-            color: #ffffff; background-color: #00356B; border-radius: 5px; font-size: 18px; 
-            transition: background-color 0.3s, transform 0.3s;}
-        a:hover {background-color: #0056b3; transform: translateY(-2px);}
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #444;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 40px;
+        }
+        h2 {
+            color: #444;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 15px;
+
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #F08080;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        a:hover {
+            background-color: tomato;
+        }
+
+        .pic {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 450px; 
+            height: auto;
+            opacity: 0.7; 
+            z-index: 0;
+        }
+
+        .pic2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 350px; 
+            height: auto;
+            opacity: 0.7; 
+            z-index: 0;
+        }
     </style>
+
     <title>Home</title>
 </head>
 <body>
 
-    <header>
-        <a href="/signup">Sign Up</a>
-        <a href="/signin">Sign In</a>
-    </header>
 
-    <h1>Younited GloPals</h1>
-    <h2>Welcome to Younited GloPals</h2>
+    <div class="container">
+        <h1>Younited GloPals</h1>
+        <br>
+        <h2>Welcome to Younited GloPals</h2>
+        <br>
+        <a href="/signup">Sign Up</a>
+        <br>
+        <a href="/signin">Sign In</a>
+    </div>
+    <img src="static/bgpic.jpg" class="pic" alt="pic1">
+    <img src="static/bgpic2.jpg" class="pic2" alt="pic2">
+
 
 </body>
 </html>

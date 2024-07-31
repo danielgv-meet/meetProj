@@ -13,6 +13,7 @@ firebaseConfig = {
   "databaseURL": "https://project2-b06a5-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
+
 app = Flask(__name__, template_folder='templates', static_folder='static')
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
@@ -127,4 +128,6 @@ def edit_profile():
   	return render_template('edit_profile.html')
 
 if __name__ == "__main__":
+ 	app.run(debug=True)
+    
  	app.run(debug=True)

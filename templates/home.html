@@ -1,14 +1,84 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<style>
-		
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #444;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #F08080;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        a:hover {
+            background-color: tomato;
+        }
+
+        .pic {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 450px; 
+            height: auto;
+            opacity: 0.7; 
+            z-index: 0;
+        }
+
+        .pic2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 350px; 
+            height: auto;
+            opacity: 0.7; 
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
-	<h1>HOME</h1>
-	<a href="/your_profile">My profile</a>
-	<a href="/profiles">All profiles</a>
-	<a href="/signout">signout</a>
-	<a href="https://younitedschool.org/apply/"> link to apply in the official Younited website</a>
+    <div class="container">
+        <h1>HOME</h1>
+        <a href="/your_profile">My profile</a>
+        <a href="/profiles">All profiles</a>
+        <a href="https://younitedschool.org/apply/">Link to apply on the official Younited website</a>
+        <a href="/signout">Sign out</a>
+    </div>
+    <img src="static/bgpic.jpg" class="pic" alt="pic1">
+    <img src="static/bgpic2.jpg" class="pic2" alt="pic2">
 </body>
 </html>
